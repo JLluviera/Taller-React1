@@ -5,8 +5,7 @@ import Register from './Register'
 export default function HeaderGuardianes() {
   return (
   <div>
-        <header className="container-fluid header">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <header className="container-fluid header bg-dark text-white text-center p-3">
                 <div className="row in-line-flex">
                     <div className="col-12">
                         <h1>Guardianes del Entorno</h1>
@@ -16,7 +15,6 @@ export default function HeaderGuardianes() {
                         <Register />
                     </div>
                 </div>
-            </nav>        
         </header>
    </div>  
   )}
