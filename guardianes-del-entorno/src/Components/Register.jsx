@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const Register = () => {
     const [user, setUser] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState(null);
@@ -27,9 +28,20 @@ const Register = () => {
                     "Content-Type": "application/json",
                     "ngrok-skip-browser-warning": "true",
                 },
+<<<<<<< HEAD
                 body: JSON.stringify(
                     userData
                 )
+=======
+                body: JSON.stringify({
+                    User: {
+                        name: name,
+                        username: user,
+                        email: email,
+                        password: password
+                    }
+                })
+>>>>>>> 161ccf34c5a92c9a144bbbb24aa68273c40fbfff
             });
 
             if (!response.ok) {
@@ -73,6 +85,10 @@ const Register = () => {
                     </div>
                     <div className="modal-body">
                         <form onSubmit={HandleSubmit}>
+                            <div className="mb-3">
+                                <label htmlFor="name" className="form-label">Nombre</label>
+                                <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
+                            </div>
                             <div className="mb-3">
                                 <label htmlFor="username" className="form-label">Nombre de usuario</label>
                                 <input type="text" className="form-control" id="username" onChange={(e) => setUser(e.target.value)} required />
