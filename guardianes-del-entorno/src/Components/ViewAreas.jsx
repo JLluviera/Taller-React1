@@ -12,6 +12,8 @@ const ViewAreas = (area) => {
           Mas informacion
         </a>
         <div className='collapse' id='collapseInfo'>
+          dsds
+          d
         <p className='card-text'>{area.description}</p>
         </div>
       </div>
