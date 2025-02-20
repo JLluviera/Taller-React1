@@ -12,20 +12,24 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-
+        let userData = { 
+            User: {
+                name : user, 
+                username: user,
+                email: email,
+                password: password
+            }
+        };
         try {
-            const response = await fetch('https://mammal-excited-tarpon.ngrok-free.app/api/user/register?secret=TallerReact2025!', {
-                method: 'POST',
+            const response = await fetch("https://mammal-excited-tarpon.ngrok-free.app/api/user/register?secret=TallerReact2025!", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
+                    "ngrok-skip-browser-warning": "true",
                 },
-                body: JSON.stringify({
-                    User: {
-                        username: user,
-                        email: email,
-                        password: password
-                    }
-                })
+                body: JSON.stringify(
+                    userData
+                )
             });
 
             if (!response.ok) {

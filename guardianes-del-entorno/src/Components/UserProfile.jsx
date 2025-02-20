@@ -7,7 +7,7 @@ const UserProfile = () => {
     const [page, setPage] = useState(1);
     const [totalRecords, setTotalRecords] = useState(0);
     const pageSize = 10;
-    const userId = 1; // Temporalmente fijo
+    const userId = 1; 
 
     const fetchUsers = async (pageNumber) => {
         setLoading(true);

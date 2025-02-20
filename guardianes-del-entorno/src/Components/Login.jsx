@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUser } from "../userSlice"; // Importar la acción de Redux
+import { setUser } from "../userSlice"; 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Login = () => {
@@ -8,18 +8,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false); // Agregado para mostrar carga
-  const dispatch = useDispatch(); // Hook para usar Redux
+  const [loading, setLoading] = useState(false); 
+  const dispatch = useDispatch(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Iniciar el loading
+    setLoading(true); 
     setError("");
     setMessage("");
 
     if (!email || !password) {
       setError("Por favor, complete todos los campos.");
-      setLoading(false); // Detener el loading
+      setLoading(false); 
       return;
     }
 
@@ -37,26 +37,26 @@ const Login = () => {
 
       if (response.status === 403) {
         setError("Acceso denegado: Código secreto incorrecto");
-        setLoading(false); // Detener el loading
+        setLoading(false); 
         return;
       }
       if (response.status === 500) {
         setError("Error interno del servidor");
-        setLoading(false); // Detener el loading
+        setLoading(false); 
         return;
       }
 
       const data = await response.json();
       if (data.isValid && data.user) {
         setMessage("Login exitoso!!");
-        dispatch(setUser(data.user)); // Guardar usuario en Redux
+        dispatch(setUser(data.user)); 
       } else {
         setError("Credenciales incorrectas");
       }
     } catch (error) {
       setError("Error al conectar con el servidor");
     } finally {
-      setLoading(false); // Detener el loading
+      setLoading(false); 
     }
   };
 
