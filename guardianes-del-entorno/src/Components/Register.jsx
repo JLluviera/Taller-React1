@@ -15,7 +15,7 @@ const Register = () => {
         setError(null);
         let userData = { 
             User: {
-                name : user, 
+                name : name, 
                 username: user,
                 email: email,
                 password: password
