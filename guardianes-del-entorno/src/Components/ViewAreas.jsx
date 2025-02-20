@@ -1,10 +1,5 @@
 import React from 'react'
 
-<<<<<<< HEAD
-const ViewAreas = () => {
-  return (
-    <div>ViewAreas</div>
-=======
 const ViewAreas = (area) => {
   const uno = 
     {
@@ -41,7 +36,6 @@ const ViewAreas = (area) => {
       </div>
 
     </div>
->>>>>>> 161ccf34c5a92c9a144bbbb24aa68273c40fbfff
   )
 }
 

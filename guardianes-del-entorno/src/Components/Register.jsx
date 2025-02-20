@@ -28,20 +28,9 @@ const Register = () => {
                     "Content-Type": "application/json",
                     "ngrok-skip-browser-warning": "true",
                 },
-<<<<<<< HEAD
                 body: JSON.stringify(
                     userData
                 )
-=======
-                body: JSON.stringify({
-                    User: {
-                        name: name,
-                        username: user,
-                        email: email,
-                        password: password
-                    }
-                })
->>>>>>> 161ccf34c5a92c9a144bbbb24aa68273c40fbfff
             });
 
             if (!response.ok) {
