@@ -1,5 +1,7 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Modal } from "bootstrap"; // Importa Modal de Bootstrap
 
 const Register = () => {
     const [user, setUser] = useState("");
@@ -9,42 +11,49 @@ const Register = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const PostUser = async (e) => {
+    // Función para abrir el modal manualmente
+    const openModal = () => {
+        const modal = new Modal(document.getElementById("RegisterModal"));
+        modal.show();
+    };
+
+    const postUser = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-        let userData = { 
-            User: {
-                name : name, 
-                username: user,
-                email: email,
-                password: password
-            }
-        };
+    
         try {
-            const response = await fetch("https://mammal-excited-tarpon.ngrok-free.app/api/user/register?secret=TallerReact2025!", {
-                method: "POST",
+            const response = await fetch('https://mammal-excited-tarpon.ngrok-free.app/api/user/register?secret=TallerReact2025!', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                    "ngrok-skip-browser-warning": "true",
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(
-                    userData
-                )
+                body: JSON.stringify({
+                    user: {
+                        name: name,
+                        username: user,
+                        email: email,
+                        password: password
+                    }
+                })
             });
-
+    
+            if (response.status === 409) {
+                throw new Error("El correo electrónico ya está en uso.");
+            }
+    
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
-
+    
             const data = await response.json();
-
+    
             if (data.Result === true) {
-                alert("Usuario registrado correctamente, ya puede logearse");
+                alert("Usuario registrado correctamente, ya puede iniciar sesión.");
             } else {
-                alert("Error al registrar usuario");
+                alert("Error al registrar usuario.");
             }
-
+    
         } catch (error) {
             setError(error.message);
             alert(`Error: ${error.message}`);
@@ -52,56 +61,55 @@ const Register = () => {
             setLoading(false);
         }
     };
-
-    const HandleSubmit = async (e) => {
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await PostUser(e);
+        postUser(e);
     };
 
     return (
-
         <div>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal">
-            Registrarme
-        </button>
+            {/* Botón sin data-bs-toggle para abrir el modal manualmente */}
+            <button type="button" className="btn btn-primary" onClick={openModal}>
+                Registrarme
+            </button>
     
-        <div className="modal fade text-black" id="RegisterModal" tabIndex="-1" aria-labelledby="RegisterModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="RegisterModalLabel">Registro</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                        <form onSubmit={HandleSubmit}>
-                            <div className="mb-3">
-                                <label htmlFor="name" className="form-label">Nombre</label>
-                                <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="username" className="form-label">Nombre de usuario</label>
-                                <input type="text" className="form-control" id="username" onChange={(e) => setUser(e.target.value)} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Correo electrónico</label>
-                                <input type="email" className="form-control" id="email" onChange={(e) => setEmail(e.target.value)} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="password" className="form-label">Contraseña</label>
-                                <input type="password" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)} required />
-                            </div>
-                            <button type="submit" className="btn btn-primary" disabled={loading}>
-                                {loading ? "Registrando..." : "Registrarse"}
-                            </button>
-                        </form>
-                        {error && <div className="alert alert-danger mt-3">{error}</div>}
+            {/* Modal */}
+            <div className="modal fade text-black" id="RegisterModal" tabIndex="-1" aria-labelledby="RegisterModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="RegisterModalLabel">Registro</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">Nombre</label>
+                                    <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="username" className="form-label">Nombre de usuario</label>
+                                    <input type="text" className="form-control" id="username" onChange={(e) => setUser(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Correo electrónico</label>
+                                    <input type="email" className="form-control" id="email" onChange={(e) => setEmail(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">Contraseña</label>
+                                    <input type="password" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)} required />
+                                </div>
+                                <button type="submit" className="btn btn-primary" disabled={loading}>
+                                    {loading ? "Registrando..." : "Registrarse"}
+                                </button>
+                            </form>
+                            {error && <div className="alert alert-danger mt-3">{error}</div>}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-
     );  
 };
 
