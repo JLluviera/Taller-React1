@@ -1,17 +1,17 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const DeleteArea = (idArea) => {
+const DeleteArea = ({ idArea }) => {  
     const user = useSelector((state) => state.user);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const DeleteArea = async (e) => {
+    const handleDeleteArea = async (e) => {  
         e.preventDefault();
         setLoading(true);
         setError(null);
 
-        let deleteAreaData = {
+        const deleteAreaData = {
             userId: user.id,
             naturalAreaId: idArea
         };
@@ -22,9 +22,7 @@ const DeleteArea = (idArea) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(
-                    deleteAreaData
-                )
+                body: JSON.stringify(deleteAreaData),
             });
 
             if (!response.ok) {
@@ -38,23 +36,23 @@ const DeleteArea = (idArea) => {
             } else {
                 alert("Error al eliminar área");
             }
-
-        }catch (error) {
+        } catch (error) {
             setError(error.message);
             alert(`Error: ${error.message}`);
-            setLoading(false);
+        } finally {
+            setLoading(false); 
         }
+    };
 
-    }
+    return (
+        <button 
+            className="btn btn-danger" 
+            onClick={handleDeleteArea} 
+            disabled={loading} 
+        >
+            {loading ? "Eliminando..." : "Eliminar Área"}
+        </button>
+    );
+};
 
-    const onClickDelete = async (e) => {
-        e.preventDefault();
-        await DeleteArea(e);
-    }
-
-  return (
-    <div>DeleteArea</div>
-  )
-}
-
-export default DeleteArea
+export default DeleteArea;

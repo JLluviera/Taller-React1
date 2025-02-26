@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ModalCargaDatosEspecies = (idArea) => {
+const ModalCargaDatosEspecies = ({ idArea }) => {
     const user = useSelector((state) => state.user);
 
     const [commonName, setCommonName] = useState("");

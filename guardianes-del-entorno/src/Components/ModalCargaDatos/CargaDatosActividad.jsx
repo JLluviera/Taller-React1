@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const CargaDatosActividad = (idArea) => {
+const CargaDatosActividad = ({ idArea }) => {
 
     const user = useSelector((state) => state.user);
 
