@@ -31,6 +31,10 @@ const ViewAreas = (area) => {
             <li className="list-group-item text-secondary">{area.conservationStatus}</li>
             <li className="list-group-item text-secondary">{area.location}</li>
             <li className='list-group-item text-secondary'>{area.region}</li>
+            <li className='list-group-item'> 
+              <botton className='btn btn-primary'>Agregar Especie</botton>
+              
+                        </li>
           </ul>
         </div>
       </div>

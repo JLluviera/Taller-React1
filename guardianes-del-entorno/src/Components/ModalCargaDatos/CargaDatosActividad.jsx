@@ -1,11 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const CargaDatosActividad = () => {
+const CargaDatosActividad = (idArea) => {
 
     const user = useSelector((state) => state.user);
 
-    const [naturalAreaId, setNaturalAreaId] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [date, setDate] = useState("");
     const [loading, setLoading] = useState(false);
@@ -20,7 +19,7 @@ const CargaDatosActividad = () => {
         let postDatosActividad = {
             userId: user.id,
             activity: {
-                naturalAreaId: naturalAreaId,
+                naturalAreaId: idArea,
                 descripcion: descripcion,
                 date: date
             }
@@ -71,14 +70,18 @@ const CargaDatosActividad = () => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="DatosAreaLabel">INgreso de datos</h1>
+                            <h1 className="modal-title fs-5" id="DatosAreaLabel">Ingreso de datos</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <form onSubmit={HandleSubmitActividades}>  
                                 <div className="mb-3">
-                                    <label className='form-label' htmlFor='naturalAreaId'>ID Area Protegida</label>
-                                    <input type='text' className='form-control' id='naturalAreaId' value={naturalAreaId} onChange={(e) => setNaturalAreaId(e.target.value)} required />
+                                    <label className='form-label' htmlFor='descripcion'>Descripcion</label>
+                                    <input type='text' className='form-control' id='descripcion' value={naturalAreaId} onChange={(e) => setDescripcion(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label className='form-label' htmlFor='date'>Fecha de realizacion</label>
+                                    <input type='date' className='form-control' id='date' value={date} onChange={(e) => setDate(e.target.value)} required />
                                 </div>
                             </form>
                         </div>
