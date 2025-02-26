@@ -47,8 +47,8 @@ const Register = () => {
             }
     
             const data = await response.json();
-    
-            if (data.Result === true) {
+            
+            if (data.result == true) {
                 alert("Usuario registrado correctamente, ya puede iniciar sesión.");
             } else {
                 alert("Error al registrar usuario.");
