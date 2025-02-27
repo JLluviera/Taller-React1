@@ -50,8 +50,10 @@ const Login = () => {
       if (data.isValid && data.user) {
         setMessage("Login exitoso!!");
         dispatch(setUser(data.user)); 
+        setLoading(false);
       } else {
         setError("Credenciales incorrectas");
+        setLoading(false);
       }
     } catch (error) {
       setError("Error al conectar con el servidor");
@@ -78,11 +80,11 @@ const Login = () => {
               {message && <div className="alert alert-success">{message}</div>}
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Correo Electrónico</label>
+                  <label htmlFor="email-login" className="form-label">Correo Electrónico</label>
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
+                    id="email-login"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
