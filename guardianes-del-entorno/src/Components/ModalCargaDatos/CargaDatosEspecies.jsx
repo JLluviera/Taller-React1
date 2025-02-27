@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';  // Importa useSelector
+
 
 const ModalCargaDatosEspecies = ({ idArea }) => {
     const user = useSelector((state) => state.user);
@@ -62,10 +64,6 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
 
   return (
         <div>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosAreaModal">
-                Agregar un Area Protegida
-            </button>
-        
             <div className="modal fade text-black" id="DatosArea" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
