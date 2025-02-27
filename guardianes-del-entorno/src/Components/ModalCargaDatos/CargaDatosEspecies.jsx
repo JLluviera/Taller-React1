@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';  // Importa useSelector
 
 
-const ModalCargaDatosEspecies = () => {
+const ModalCargaDatosEspecies = ({ idArea }) => {
     const user = useSelector((state) => state.user);
 
     const [commonName, setCommonName] = useState("");
     const [scientificName, setScientificName] = useState("");
     const [category, setCategory] = useState("");
     const [conservationStatus, setConservationStatus] = useState("");
-    const [naturalAreaId, setNaturalAreaId] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -25,7 +24,7 @@ const ModalCargaDatosEspecies = () => {
                 scientificName: scientificName,
                 category: category,
                 conservationStatus: conservationStatus,
-                naturalAreaId: naturalAreaId
+                naturalAreaId: idArea
             }
         };
 
@@ -89,10 +88,6 @@ const ModalCargaDatosEspecies = () => {
                                 <div className="mb-3">
                                     <label htmlFor="conservationStatus" className="form-label">Estado de Conservación</label>
                                     <input type="text" className="form-control" id="conservationStatus" name="conservationStatus" value={conservationStatus} onChange={(e) => setConservationStatus(e.target.value)} required/>
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="naturalAreaId" className="form-label">Id de Area Natural</label>
-                                    <input type="text" className="form-control" id="naturalAreaId" name="naturalAreaId" value={naturalAreaId} onChange={(e) => setNaturalAreaId(e.target.value)} required/> 
                                 </div>
                                 <button type="submit" className="btn btn-primary">Guardar</button>
                             </form>

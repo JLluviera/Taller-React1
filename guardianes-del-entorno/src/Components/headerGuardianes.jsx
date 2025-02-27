@@ -22,8 +22,8 @@ export default function HeaderGuardianes() {
                     <p className="mb-0">¡Cuidando nuestro planeta!</p>
                 </div>
                 <div className="d-flex gap-2">
-                    <Register />
-                    {user ? <UserProfile /> : <Login />}
+                    {!user ? <Register /> : null}
+                    {user ? <UserProfile /> :  <Login />}
                 </div>
             </div>
         </header>

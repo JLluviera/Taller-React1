@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Modal } from "bootstrap"; // Importa Modal de Bootstrap
@@ -47,8 +47,8 @@ const Register = () => {
             }
     
             const data = await response.json();
-    
-            if (data.Result === true) {
+            
+            if (data.result === true) {
                 alert("Usuario registrado correctamente, ya puede iniciar sesión.");
             } else {
                 alert("Error al registrar usuario.");

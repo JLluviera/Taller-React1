@@ -2,7 +2,7 @@ import './App.css';
 import HeaderGuardianes from './Components/headerGuardianes.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import ViewAreas from './Components/ViewAreas.jsx';
+import ViewAreas from './Components/Areas/ViewAreas.jsx';
 import ViewSpecies from './Components/Especies/ViewEspecies.jsx';
 import Footer from './Components/Footer.jsx';
 
