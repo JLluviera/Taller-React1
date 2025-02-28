@@ -1,25 +1,38 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUser } from "../userSlice"; 
+import { setUser } from "../userSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Modal } from "bootstrap";;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false); 
-  const dispatch = useDispatch(); 
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+
+  const openModal = () => {
+          const modal = new Modal(document.getElementById("LoginModal"));
+          modal.show();
+      };
+  
+  const closeModal = () => {
+    const modal = new Modal (document.getElementById("LoginModal"));
+    modal.hide();
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     setError("");
     setMessage("");
 
     if (!email || !password) {
       setError("Por favor, complete todos los campos.");
-      setLoading(false); 
+      setLoading(false);
       return;
     }
 
@@ -36,41 +49,44 @@ const Login = () => {
       );
 
       if (response.status === 403) {
-        setError("Acceso denegado: Código secreto incorrecto");
-        setLoading(false); 
+        setError("Acceso denegado: Código secreto incorrecto");
+        setLoading(false);
         return;
       }
       if (response.status === 500) {
         setError("Error interno del servidor");
-        setLoading(false); 
+        setLoading(false);
         return;
       }
 
       const data = await response.json();
       if (data.isValid && data.user) {
         setMessage("Login exitoso!!");
-        dispatch(setUser(data.user)); 
+        dispatch(setUser(data.user));
+        setLoading(false);
+        closeModal()
       } else {
         setError("Credenciales incorrectas");
+        setLoading(false);
       }
     } catch (error) {
       setError("Error al conectar con el servidor");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
     <div>
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LoginModal">
-        Iniciar Sesión
+      <button type="button" className="btn btn-primary" onClick={openModal}>
+        Iniciar Sesión
       </button>
 
       <div className="modal fade text-black" id="LoginModal" tabIndex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="LoginModalLabel">Iniciar Sesión</h1>
+              <h1 className="modal-title fs-5" id="LoginModalLabel">Iniciar Sesión</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
@@ -78,18 +94,18 @@ const Login = () => {
               {message && <div className="alert alert-success">{message}</div>}
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Correo Electrónico</label>
+                  <label htmlFor="email-login" className="form-label">Correo Electrónico</label>
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
+                    id="email-login"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Contraseña</label>
+                  <label htmlFor="password" className="form-label">Contraseña</label>
                   <input
                     type="password"
                     className="form-control"
@@ -100,7 +116,7 @@ const Login = () => {
                   />
                 </div>
                 <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-                  {loading ? "Iniciando sesión..." : "Ingresar"}
+                  {loading ? "Iniciando sesión..." : "Ingresar"}
                 </button>
               </form>
             </div>
@@ -112,4 +128,3 @@ const Login = () => {
 };
 
 export default Login;
- 

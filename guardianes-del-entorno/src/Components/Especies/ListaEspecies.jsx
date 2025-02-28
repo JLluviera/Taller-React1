@@ -21,7 +21,16 @@ const ListaEspecies = () => {
             url = `https://mammal-excited-tarpon.ngrok-free.app/api/species/byUser?secret=TallerReact2025!&userId=${user.id}&page=1&pageSize=10`;
         }
 
-        fetch(url)
+        fetch(url, {
+            method: "GET",
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "ngrok-skip-browser-warning": "true",
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+            },
+            credentials: "include", // Si la API usa cookies o autenticación
+          })
             .then(response => response.json())
             .then(data => setSpeciesList(data.items || []))
             .catch(error => console.error("Error al obtener especies:", error));

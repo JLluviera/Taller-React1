@@ -98,47 +98,19 @@ const Register = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Nombre</label>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="name" 
-                                        value={name} 
-                                        onChange={(e) => setName(e.target.value)} 
-                                        required 
-                                    />
+                                    <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="username" className="form-label">Nombre de usuario</label>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="username" 
-                                        value={user} 
-                                        onChange={(e) => setUser(e.target.value)} 
-                                        required 
-                                    />
+                                    <input type="text" className="form-control" id="username" onChange={(e) => setUser(e.target.value)} required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Correo electrónico</label>
-                                    <input 
-                                        type="email" 
-                                        className="form-control" 
-                                        id="email" 
-                                        value={email} 
-                                        onChange={(e) => setEmail(e.target.value)} 
-                                        required 
-                                    />
+                                    <input type="email" className="form-control" id="email" onChange={(e) => setEmail(e.target.value)} required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Contraseña</label>
-                                    <input 
-                                        type="password" 
-                                        className="form-control" 
-                                        id="password" 
-                                        value={password} 
-                                        onChange={(e) => setPassword(e.target.value)} 
-                                        required 
-                                    />
+                                    <input type="password" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)} required />
                                 </div>
                                 <button type="submit" className="btn btn-primary" disabled={loading}>
                                     {loading ? "Registrando..." : "Registrarse"}

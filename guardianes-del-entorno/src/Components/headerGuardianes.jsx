@@ -7,6 +7,7 @@ import UserProfile from './UserProfile';
 
 export default function HeaderGuardianes() {
     const user = useSelector((state) => state.user);
+    
   return (
     <div>
         <header className="container-fluid header bg-dark text-white p-3">
