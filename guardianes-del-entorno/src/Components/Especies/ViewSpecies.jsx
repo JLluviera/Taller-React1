@@ -1,86 +1,58 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-const ViewSpecies = ({ id, commonName, scientificName, category, conservationStatus, naturalAreaId, onUpdate }) => {
-    const user = useSelector((state) => state.user);
+const ViewEspecie = ({ especie }) => {
+  const user = useSelector((state) => state.user);
 
-    // Función para actualizar especie
-    const updateSpecies = () => {
-        if (!user) return alert("Debes iniciar sesión para editar.");
-        
-        const updatedSpecies = {
-            userId: user.id,
-            species: {
-                id,
-                commonName: commonName + " (Editado)",
-                scientificName,
-                category,
-                conservationStatus,
-                naturalAreaId
-            }
-        };
-
-        fetch("https://mammal-excited-tarpon.ngrok-free.app/api/species/update?secret=TallerReact2025!", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedSpecies)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result) {
-                alert("Especie actualizada!");
-                onUpdate();
-            }
-        })
-        .catch(error => console.error("Error al actualizar especie:", error));
-    };
-
-    // Función para eliminar especie
-    const deleteSpecies = () => {
-        if (!user) return alert("Debes iniciar sesión para eliminar.");
-        
-        const confirmDelete = window.confirm("¿Estás seguro de eliminar esta especie?");
-        if (!confirmDelete) return;
-
-        const body = {
-            userId: user.id,
-            speciesId: id
-        };
-
-        fetch("https://mammal-excited-tarpon.ngrok-free.app/api/species/delete?secret=TallerReact2025!", {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result) {
-                alert("Especie eliminada!");
-                onUpdate();
-            }
-        })
-        .catch(error => console.error("Error al eliminar especie:", error));
-    };
-
-    return (
-        <div className="card" style={{ width: "18rem", margin: "10px" }}>
-            <div className="card-header d-flex justify-content-between align-items-center">
-                <h2 className="mb-0">{commonName}</h2>
-            </div>
-
-            <div className="card-body">
-                <p><strong>Nombre científico:</strong> {scientificName}</p>
-                <p><strong>Categoría:</strong> {category}</p>
-                <p><strong>Estado de conservación:</strong> {conservationStatus}</p>
-                <p><strong>Área natural:</strong> {naturalAreaId}</p>
-            </div>
-
-                <div className="card-footer d-flex justify-content-between">
-                    <button className="btn btn-warning" onClick={updateSpecies}>Editar</button>
-                    <button className="btn btn-danger" onClick={deleteSpecies}>Borrar</button>
+  return (
+    <div className='card' style={{ width: '18rem' }}>
+      <img src={especie.image} className='card-img-top' alt={especie.name} />
+      <div className='card-header'>
+        <h3>{especie.name}</h3>
+      </div>
+      <div className='card-body'>
+        <a 
+          className="btn btn-primary" 
+          data-bs-toggle="collapse" 
+          href="#collapseInfoEspecie" 
+          role="button" 
+          aria-expanded="false" 
+          aria-controls="collapseInfoEspecie"
+        >
+          Más información
+        </a>
+        <div className='collapse' id='collapseInfoEspecie'>
+          <ul className="list-group list-group-flush">
+            <li className='list-group-item'><strong>Nombre Científico:</strong> {especie.scientificName}</li>
+            <li className="list-group-item"><strong>Familia:</strong> {especie.family}</li>
+            <li className="list-group-item text-secondary"><strong>Estado de Conservación:</strong> {especie.conservationStatus}</li>
+            <li className="list-group-item text-secondary"><strong>Hábitat:</strong> {especie.habitat}</li>
+            <li className='list-group-item text-secondary'><strong>Distribución:</strong> {especie.distribution}</li>
+            
+            {user && (
+              <li className='list-group-item'> 
+                <button 
+                  className="btn btn-secondary" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#collapseOpcionesEspecie" 
+                  aria-expanded="false" 
+                  aria-controls="collapseOpcionesEspecie"
+                >
+                  Más opciones
+                </button>
+                <div className="collapse d-inline-flex" id="collapseOpcionesEspecie">
+                  <button className='btn btn-warning'>Editar</button>
+                  <button className='btn btn-danger'>Eliminar</button>
                 </div>
+              </li>
+            )}
+          </ul>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
-export default ViewSpecies;
+export default ViewEspecie;
+

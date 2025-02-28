@@ -2,11 +2,9 @@ import './App.css';
 import HeaderGuardianes from './Components/headerGuardianes.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import ViewAreas from './Components/Areas/ViewAreas.jsx';
-import ListaEspecies from './Components/Especies/ListaEspecies.jsx';
 import Footer from './Components/Footer.jsx';
 import ListAreas from './Components/Areas/ListAreas.jsx';
-import CargaDatosEspecies from './Components/ModalCargaDatos/CargaDatosEspecies.jsx';
+import ListSpecies from './Components/Especies/ListSpecies.jsx';
 function App() {
   return (
     <div className="App">
@@ -18,7 +16,7 @@ function App() {
         <ListAreas/>
       </div>
       <div className="container">
-        <ListaEspecies />
+        <ListSpecies />
       </div>
     <div>
       <Footer />
