@@ -11,7 +11,7 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
     const [naturalAreaId, setNaturalAreaId] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [isModalVisible, setIsModalVisible] = useState(false); 
+    const [isModalVisible, setIsModalVisible] = useState(true); // Start with the modal visible
 
     const PostEspecies = async () => {
         setLoading(true);
@@ -63,14 +63,6 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
 
     return (
         <div className="container">
-              
-          <button
-            className="btn btn-primary"
-            onClick={() => setIsModalVisible(true)} 
-          >
-            Ingresar Especie
-          </button>
-    
           {isModalVisible && (
             <div className="modal fade show d-block" id="DatosArea" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
               <div className="modal-dialog">
@@ -168,3 +160,4 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
 };
 
 export default ModalCargaDatosEspecies;
+
