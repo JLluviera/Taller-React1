@@ -7,9 +7,12 @@ const UserProfile = () => {
     return(
         <div>
             <h2 className="">Bienvenido {userProfile.name}</h2>
-            <botton className="btn btn-danger" onClick={logout}>LogOut</botton>
+            <button className="btn btn-danger" onClick={logout}>LogOut</button>
         </div>
+
+        
     )
 };
+
 
 export default UserProfile;

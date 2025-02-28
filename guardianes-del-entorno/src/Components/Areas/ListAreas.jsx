@@ -17,7 +17,6 @@ const ListAreas = () => {
   const filterOrder = ["keyword", "areaType", "region", "conservationStatus"];
 
   useEffect(() => {
-    // Construcción de la URL dentro del efecto para evitar dependencias problemáticas
     let url = "https://mammal-excited-tarpon.ngrok-free.app/api/natural-area/list?secret=TallerReact2025!&";
 
     filterOrder.forEach((key) => {
@@ -32,10 +31,10 @@ const ListAreas = () => {
         return res.json();
       })
       .then((newData) => {
-        setData((prevData) => (page === 1 ? newData : [...prevData, ...newData]));
+        setData((prevData) => (page === 1 ? newData.items : [...prevData, ...newData.items]));
       })
       .catch((err) => setError(err.message));
-  }, [filters, page]); // Dependencias correctas
+  }, [filters, page]); 
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
