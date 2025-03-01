@@ -2,11 +2,9 @@ import './App.css';
 import HeaderGuardianes from './Components/headerGuardianes.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
-import ViewSpecies from './Components/Especies/ViewEspecies.jsx';
 import Footer from './Components/Footer.jsx';
 import ListAreas from './Components/Areas/ListAreas.jsx';
-
+import ListSpecies from './Components/Especies/ListSpecies.jsx';
 function App() {
   return (
     <div className="App">
@@ -17,14 +15,13 @@ function App() {
       <div className="container">
         <ListAreas/>
       </div>
-      <div className='container'>
-        <h1>Lista de especies</h1>
-        <ViewSpecies />
-    </div>
+      <div className="container">
+        <ListSpecies />
+      </div>
     <div>
       <Footer />
     </div>
-    </div>
+    </div>  
   );
 }
 

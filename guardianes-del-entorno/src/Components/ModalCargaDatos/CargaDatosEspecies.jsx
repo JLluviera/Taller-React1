@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';  // Importa useSelector
 
-
-const ModalCargaDatosEspecies = ({ idArea }) => {
+const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => { 
     const user = useSelector((state) => state.user);
 
     const [commonName, setCommonName] = useState("");
     const [scientificName, setScientificName] = useState("");
     const [category, setCategory] = useState("");
     const [conservationStatus, setConservationStatus] = useState("");
+    const [naturalAreaId, setNaturalAreaId] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(true); // Start with the modal visible
 
-    const PostEspecies = async (e) => {
-        e.preventDefault();
+    const PostEspecies = async () => {
         setLoading(true);
         setError(null);
 
@@ -24,7 +24,7 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
                 scientificName: scientificName,
                 category: category,
                 conservationStatus: conservationStatus,
-                naturalAreaId: idArea
+                naturalAreaId: naturalAreaId
             }
         };
 
@@ -34,32 +34,31 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(
-                    postEspeciesData
-                )
+                body: JSON.stringify(postEspeciesData)
             });
 
-            if(!response.ok) {
+            if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
 
             const data = await response.json();
 
-            if(data.result === true) {
+            if (data.result === true) {
                 alert("Especie registrada correctamente");
             } else {
                 alert("Error al registrar especie");
             }
-        }catch(error) {
+        } catch (error) {
             setError(error.message);
             alert(`Error: ${error.message}`);
+        } finally {
             setLoading(false);
         }
     }
 
-    const HandleSubmitEspecies = async (e) => {
+    const HandleSubmitEspecies = (e) => {
         e.preventDefault();
-        await PostEspecies(e);
+        PostEspecies();
     }
 
   return (
@@ -95,8 +94,10 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
                     </div>
                 </div>
             </div>
+          )}
         </div>
-  )
-}
+      );
+};
 
-export default ModalCargaDatosEspecies
+export default ModalCargaDatosEspecies;
+
