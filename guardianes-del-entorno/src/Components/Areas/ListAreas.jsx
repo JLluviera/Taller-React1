@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ViewAreas from "./ViewAreas";
+import ModalCargaDatosArea from "../ModalCargaDatos/CargaDatosArea";
+import { useSelector } from "react-redux";
 
 const ListAreas = () => {
+  const user = useSelector((state) => state.user)
   const [filters, setFilters] = useState({
     keyword: "",
     areaType: "",
@@ -78,7 +81,9 @@ const ListAreas = () => {
       </div>
 
       {error && <p className="text-danger text-center">{error}</p>}
-
+      <div className="row mt-4">
+              {user? <ModalCargaDatosArea/> : null}
+      </div>
       <div className="row mt-4">
         {data.length === 0 ? (
           <p className="text-center">No hay resultados</p>

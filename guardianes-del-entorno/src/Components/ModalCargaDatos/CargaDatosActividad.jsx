@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useState } from 'react';
 
 const CargaDatosActividad = ({ idArea }) => {
 
@@ -77,7 +78,7 @@ const CargaDatosActividad = ({ idArea }) => {
                             <form onSubmit={HandleSubmitActividades}>  
                                 <div className="mb-3">
                                     <label className='form-label' htmlFor='descripcion'>Descripcion</label>
-                                    <input type='text' className='form-control' id='descripcion' value={naturalAreaId} onChange={(e) => setDescripcion(e.target.value)} required />
+                                    <input type='text' className='form-control' id='descripcion' onChange={(e) => setDescripcion(e.target.value)} required />
                                 </div>
                                 <div className="mb-3">
                                     <label className='form-label' htmlFor='date'>Fecha de realizacion</label>
