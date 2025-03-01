@@ -94,7 +94,7 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
                     </div>
                 </div>
             </div>
-          )}
+          
         </div>
       );
 };
