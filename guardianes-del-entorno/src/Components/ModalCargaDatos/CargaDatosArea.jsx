@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import React from 'react'
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+
 
 const ModalCargaDatosArea = ({ setAreas }) => {  // Recibe setAreas como prop
     const [name, setName] = useState("");
