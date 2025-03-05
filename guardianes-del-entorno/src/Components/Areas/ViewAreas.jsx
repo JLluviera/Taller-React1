@@ -1,46 +1,66 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import CargarDatosActividad from "../ModalCargaDatos/CargaDatosActividad"
-import CargarDatosEspecies from "../ModalCargaDatos/CargaDatosEspecies"
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import CargarDatosActividad from "../ModalCargaDatos/CargaDatosActividad";
+import CargarDatosEspecies from "../ModalCargaDatos/CargaDatosEspecies";
 
 const ViewAreas = ({ area }) => {
-  const user = useSelector((state) => state.user)
+  const [isCollapsed, setIsCollapsed] = useState(false);  // Estado para manejar el colapso
+  const [isOptionsCollapsed, setIsOptionsCollapsed] = useState(false); // Estado para las opciones
+
+  const user = useSelector((state) => state.user);
+
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed);  // Función para alternar el estado del colapso
+  const toggleOptionsCollapse = () => setIsOptionsCollapsed(!isOptionsCollapsed);  // Función para alternar el estado de opciones
 
   return (
-    <div className='card' style={{width: "18rem"}}>
-      <img src={area.image} className='card-img-top' alt='area.name' />
-      <div className='card-header'>
-        <h3>{area.name}</h3>  
+    <div className="card" style={{ width: "18rem" }}>
+      <img src={area.image} className="card-img-top" alt={area.name} />
+      <div className="card-header">
+        <h3>{area.name}</h3>
       </div>
-      <div className='card-body'>
-        <button className="btn btn-primary" data-bs-toggle="collapse" data-bs-target={`#${area.id}`} aria-expanded="false" aria-controls={area.id}>
-          Mas informacion
+      <div className="card-body">
+        {/* Botón para abrir/cerrar el colapso de la información */}
+        <button 
+          className="btn btn-primary" 
+          type="button" 
+          aria-expanded={isCollapsed} 
+          onClick={toggleCollapse} 
+        >
+          {isCollapsed ? 'Cerrar información' : 'Más información'}
         </button>
-        <div className='collapse' id={area.id}>
+
+        {/* Colapso de la información */}
+        <div className={`collapse ${isCollapsed ? 'show' : ''}`} id={area.id}>
           <ul className="list-group list-group-flush">
-            <li className='list-group-item'>{area.areaType}</li>
+            <li className="list-group-item">{area.areaType}</li>
             <li className="list-group-item">{area.description}</li>
             <li className="list-group-item text-secondary">{area.conservationStatus}</li>
             <li className="list-group-item text-secondary">{area.location}</li>
-            <li className='list-group-item text-secondary'>{area.region}</li>
-            {user? (
-            <li className='list-group-item'> 
-              <button className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target= {`#collapseOpcionesArea${area.id}`} aria-expanded="false" aria-controls= {`collapseOpcionesArea${area.id}`}>
-              Mas opciones
-              </button>
-              <div className="collapse d-inline-flex" id={`collapseOpcionesArea${area.id}`}>
-                <CargarDatosActividad idArea={area.id}/>
-                <CargarDatosEspecies idArea={area.id}/>
-              </div>
-            </li> 
-            ): null }
-          </ul>
+            <li className="list-group-item text-secondary">{area.region}</li>
+            {user ? (
+              <li className="list-group-item">
+                {/* Botón para abrir/cerrar las opciones */}
+                <button 
+                  className="btn btn-secondary" 
+                  type="button" 
+                  aria-expanded={isOptionsCollapsed} 
+                  onClick={toggleOptionsCollapse}
+                >
+                  {isOptionsCollapsed ? 'Cerrar opciones' : 'Más opciones'}
+                </button>
 
+                {/* Colapso de las opciones */}
+                <div className={`collapse ${isOptionsCollapsed ? 'show' : ''}`} id={`collapseOpcionesArea${area.id}`}>
+                  <CargarDatosActividad idArea={area.id} />
+                  <CargarDatosEspecies idArea={area.id} />
+                </div>
+              </li>
+            ) : null}
+          </ul>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default ViewAreas
+export default ViewAreas;
