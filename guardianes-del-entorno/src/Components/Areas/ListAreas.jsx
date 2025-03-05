@@ -90,7 +90,7 @@ const ListAreas = () => {
         ) : (
           data.map((item, index) => (
             <div className="col-md-4 mb-3" key={index}>
-              <ViewAreas area={item} />
+              <ViewAreas area={item} indexArea={index} />
             </div>
           ))
         )}
@@ -100,7 +100,7 @@ const ListAreas = () => {
         <div className="text-center mt-3">
           <button className="btn btn-success" onClick={() => setPage((prev) => prev + 1)}>
             Load More
-          </button>
+          </button> 
         </div>
       )}
     </div>

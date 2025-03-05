@@ -11,7 +11,7 @@ const ListSpecies = () => {
   const pageSize = 10; 
 
   useEffect(() => {
-    const url = `https://mammal-excited-tarpon.ngrok-free.app/api/species/listV?page=${page}&pageSize=${pageSize}`;
+    const url = `https://mammal-excited-tarpon.ngrok-free.app/api/species/list?secret=TallerReact2025!&page=${page}&pageSize=${pageSize}`;
 
     fetch(url)
       .then((res) => {
@@ -19,7 +19,7 @@ const ListSpecies = () => {
         return res.json();
       })
       .then((newData) => {
-        setData((prevData) => (page === 1 ? newData.Items : [...prevData, ...newData.Items]));
+        setData((prevData) => (page === 1 ? newData.items : [...prevData, ...newData.items]));
       })
       .catch((err) => setError(err.message));
   }, [page]);
@@ -41,7 +41,7 @@ const ListSpecies = () => {
         ) : (
           data.map((item, index) => (
             <div className="col-md-4 mb-3" key={index}>
-              <ViewSpecies species={item} />
+              <ViewSpecies especie={item} />
             </div>
           ))
         )}

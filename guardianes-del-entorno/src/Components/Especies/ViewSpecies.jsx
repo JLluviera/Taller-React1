@@ -6,9 +6,8 @@ const ViewEspecie = ({ especie }) => {
 
   return (
     <div className='card' style={{ width: '18rem' }}>
-      <img src={especie.image} className='card-img-top' alt={especie.name} />
       <div className='card-header'>
-        <h3>{especie.name}</h3>
+        <h3>{especie.commonName}</h3>
       </div>
       <div className='card-body'>
         <a 
@@ -24,10 +23,8 @@ const ViewEspecie = ({ especie }) => {
         <div className='collapse' id='collapseInfoEspecie'>
           <ul className="list-group list-group-flush">
             <li className='list-group-item'><strong>Nombre Científico:</strong> {especie.scientificName}</li>
-            <li className="list-group-item"><strong>Familia:</strong> {especie.family}</li>
+            <li className="list-group-item"><strong>Categoria:</strong> {especie.category}</li>
             <li className="list-group-item text-secondary"><strong>Estado de Conservación:</strong> {especie.conservationStatus}</li>
-            <li className="list-group-item text-secondary"><strong>Hábitat:</strong> {especie.habitat}</li>
-            <li className='list-group-item text-secondary'><strong>Distribución:</strong> {especie.distribution}</li>
             
             {user && (
               <li className='list-group-item'> 
