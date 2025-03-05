@@ -49,24 +49,23 @@ const ListAreas = () => {
     <div className="container mt-4">
       <h2>Lista con Filtros</h2>
 
-      <div className="dropdown mb-4">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Filtros
-        </button>
-        <ul className="dropdown-menu p-3" style={{ minWidth: "250px" }}>
-          {filterOrder.map((key) => (
-            <li key={key} className="mb-2">
-              <input
-                type="text"
-                name={key}
-                className="form-control"
-                placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
-                value={filters[key]}
-                onChange={handleFilterChange}
-              />
-            </li>
-          ))}
-          <li>
+      <div className="row">
+        {/* Filtros a la izquierda */}
+        <div className="col-md-3">
+          <div className="card p-3">
+            <h5 className="mb-3">Filtros</h5>
+            {filterOrder.map((key) => (
+              <div key={key} className="mb-2">
+                <input
+                  type="text"
+                  name={key}
+                  className="form-control"
+                  placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                  value={filters[key]}
+                  onChange={handleFilterChange}
+                />
+              </div>
+            ))}
             <button
               className="btn btn-danger btn-sm mt-2 w-100"
               onClick={() => {
@@ -76,33 +75,34 @@ const ListAreas = () => {
             >
               Limpiar Filtros
             </button>
-          </li>
-        </ul>
-      </div>
-
-      {error && <p className="text-danger text-center">{error}</p>}
-      <div className="row mt-4">
-              {user? <ModalCargaDatosArea/> : null}
-      </div>
-      <div className="row mt-4">
-        {data.length === 0 ? (
-          <p className="text-center">No hay resultados</p>
-        ) : (
-          data.map((item, index) => (
-            <div className="col-md-4 mb-3" key={index}>
-              <ViewAreas area={item} indexArea={index} />
-            </div>
-          ))
-        )}
-      </div>
-
-      {data.length > 0 && (
-        <div className="text-center mt-3">
-          <button className="btn btn-success" onClick={() => setPage((prev) => prev + 1)}>
-            Load More
-          </button> 
+          </div>
         </div>
-      )}
+
+        {/* Lista de elementos a la derecha */}
+        <div className="col-md-9">
+          {error && <p className="text-danger text-center">{error}</p>}
+          <div className="row mt-4">{user ? <ModalCargaDatosArea /> : null}</div>
+          <div className="row mt-4">
+            {data.length === 0 ? (
+              <p className="text-center">No hay resultados</p>
+            ) : (
+              data.map((item, index) => (
+                <div className="col-md-4 mb-3" key={index}>
+                  <ViewAreas area={item} indexArea={index} />
+                </div>
+              ))
+            )}
+          </div>
+
+          {data.length > 0 && (
+            <div className="text-center mt-3">
+              <button className="btn btn-success" onClick={() => setPage((prev) => prev + 1)}>
+                Load More
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
