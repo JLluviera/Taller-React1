@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Modal } from "bootstrap";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const modalRef = useRef(null);
+  const [reload, setReload] = useState(false);
+
 
   useEffect(() => {
     const modalElement = document.getElementById("LoginModal");
@@ -65,6 +68,7 @@ const Login = () => {
           setMessage("Login exitoso!!");
           dispatch(setUser(data.user));
           setTimeout(() => closeModal(), 1000);
+          setReload(!reload);
         } else {
           setError("Credenciales incorrectas");
         }
