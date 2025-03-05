@@ -13,7 +13,7 @@ const ViewAreas = ({ area }) => {
         <h3>{area.name}</h3>  
       </div>
       <div className='card-body'>
-        <button className="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#${area.id}" aria-expanded="false" aria-controls="${area.id}">
+        <button className="btn btn-primary" data-bs-toggle="collapse" data-bs-target={`#${area.id}`} aria-expanded="false" aria-controls={area.id}>
           Mas informacion
         </button>
         <div className='collapse' id={area.id}>
@@ -25,10 +25,10 @@ const ViewAreas = ({ area }) => {
             <li className='list-group-item text-secondary'>{area.region}</li>
             {user? (
             <li className='list-group-item'> 
-              <button className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target= "#collapseOpcionesArea${area.id}" aria-expanded="false" aria-controls="collapseOpcionesArea${area.id}">
+              <button className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target= {`#collapseOpcionesArea${area.id}`} aria-expanded="false" aria-controls= {`collapseOpcionesArea${area.id}`}>
               Mas opciones
               </button>
-              <div className="collapse d-inline-flex" id="collapseOpcionesArea${area.id}">
+              <div className="collapse d-inline-flex" id={`collapseOpcionesArea${area.id}`}>
                 <CargarDatosActividad idArea={area.id}/>
                 <CargarDatosEspecies idArea={area.id}/>
               </div>
