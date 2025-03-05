@@ -14,8 +14,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const modalRef = useRef(null);
-  const [reload, setReload] = useState(false);
-
 
   useEffect(() => {
     const modalElement = document.getElementById("LoginModal");
@@ -68,7 +66,6 @@ const Login = () => {
           setMessage("Login exitoso!!");
           dispatch(setUser(data.user));
           setTimeout(() => closeModal(), 1000);
-          setReload(!reload);
         } else {
           setError("Credenciales incorrectas");
         }
