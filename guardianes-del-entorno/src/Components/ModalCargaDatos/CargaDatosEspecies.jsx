@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';  // Importa useSelector
 
-const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => { 
+const ModalCargaDatosEspecies = ({ idArea }) => { 
     const user = useSelector((state) => state.user);
 
     const [commonName, setCommonName] = useState("");
     const [scientificName, setScientificName] = useState("");
     const [category, setCategory] = useState("");
     const [conservationStatus, setConservationStatus] = useState("");
-    const [naturalAreaId, setNaturalAreaId] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [isModalVisible, setIsModalVisible] = useState(true); // Start with the modal visible
 
     const PostEspecies = async () => {
         setLoading(true);
@@ -24,7 +22,7 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
                 scientificName: scientificName,
                 category: category,
                 conservationStatus: conservationStatus,
-                naturalAreaId: naturalAreaId
+                naturalAreaId: idArea
             }
         };
 
@@ -47,6 +45,7 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
                 alert("Especie registrada correctamente");
             } else {
                 alert("Error al registrar especie");
+    
             }
         } catch (error) {
             setError(error.message);
@@ -63,11 +62,15 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
 
   return (
         <div>
-            <div className="modal fade text-black" id="DatosArea" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosEspecieModal">
+                Agregar Especie
+            </button>
+
+            <div className="modal fade text-black" id="DatosEspecieModal" tabIndex="-1" aria-labelledby="DatosEspecieLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="DatosAreaLabel">Ingreso de datos</h1>
+                            <h1 className="modal-title fs-5" id="DatosEspecieLabel">Ingreso de datos</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -88,8 +91,10 @@ const ModalCargaDatosEspecies = ({ areas = [], setAreas }) => {
                                     <label htmlFor="conservationStatus" className="form-label">Estado de Conservación</label>
                                     <input type="text" className="form-control" id="conservationStatus" name="conservationStatus" value={conservationStatus} onChange={(e) => setConservationStatus(e.target.value)} required/>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Guardar</button>
-                            </form>
+                                <button type="submit" className="btn btn-primary" disabled={loading}>
+                                    {loading ? "Registrando..." : "Registrar Especie"}
+                                </button>  
+                            </form>                         
                         </div>
                     </div>
                 </div>

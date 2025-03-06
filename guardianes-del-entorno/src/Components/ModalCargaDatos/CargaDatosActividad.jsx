@@ -63,15 +63,15 @@ const CargaDatosActividad = ({ idArea }) => {
 
   return (
     <div>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosAreaModal">
-                Agregar un Area Protegida
+        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosActividadModal">
+                Agregar Actividad
             </button>
         
-            <div className="modal fade text-black" id="DatosAreaModal" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
+            <div className="modal fade text-black" id="DatosActividadModal" tabIndex="-1" aria-labelledby="DatosActividLadel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="DatosAreaLabel">Ingreso de datos</h1>
+                            <h1 className="modal-title fs-5" id="DatosActividadLabel">Ingreso de datos</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -86,7 +86,7 @@ const CargaDatosActividad = ({ idArea }) => {
                                     <input type='date' className='form-control' id='date' value={date} onChange={(e) => setDate(e.target.value)} required />
                                 </div>
                                 <button type="submit" className="btn btn-primary" disabled={loading}>
-                                    {loading ? "Registrando..." : "Registrar Area"}
+                                    {loading ? "Registrando..." : "Registrar Actividad"}
                                 </button>
                             </form>
                         </div>
