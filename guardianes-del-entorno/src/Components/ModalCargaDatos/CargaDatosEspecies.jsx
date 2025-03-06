@@ -10,6 +10,7 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
     const [conservationStatus, setConservationStatus] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+   
 
     const PostEspecies = async () => {
         setLoading(true);
@@ -62,10 +63,11 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
 
   return (
         <div>
+          {user && (
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosEspecieModal">
                 Agregar Especie
             </button>
-
+          )}
             <div className="modal fade text-black" id="DatosEspecieModal" tabIndex="-1" aria-labelledby="DatosEspecieLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">

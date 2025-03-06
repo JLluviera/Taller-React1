@@ -8,7 +8,7 @@ const ListSpecies = () => {
   const [error, setError] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
-  const pageSize = 10; 
+  const pageSize = 10;
 
   useEffect(() => {
     const url = `https://mammal-excited-tarpon.ngrok-free.app/api/species/list?secret=TallerReact2025!&page=${page}&pageSize=${pageSize}`;
@@ -29,11 +29,7 @@ const ListSpecies = () => {
       <h2>Lista de Especies</h2>
       {error && <p className="text-danger text-center">{error}</p>}
 
-      <div className="d-flex justify-content-between mb-3">
-        <button className="btn btn-primary" onClick={() => setModalVisible(true)}>
-          Agregar Especie
-        </button>
-      </div>
+     
 
       <div className="row mt-4">
         {data.length === 0 ? (
@@ -55,9 +51,12 @@ const ListSpecies = () => {
         </div>
       )}
 
-      {modalVisible && (
-        <ModalCargaDatosEspecies setAreas={() => {}} areas={[]} />
-      )}
+      <ModalCargaDatosEspecies 
+        setAreas={() => {}} 
+        areas={[]} 
+        modalVisible={modalVisible} 
+        setModalVisible={setModalVisible}
+      />
     </div>
   );
 };
