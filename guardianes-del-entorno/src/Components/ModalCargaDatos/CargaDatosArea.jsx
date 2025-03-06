@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
-const ModalCargaDatosArea = () => {  // Recibe setAreas como prop
+const ModalCargaDatosArea = () => {  
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [areaType, setAreaType] = useState("");
@@ -42,7 +42,7 @@ const ModalCargaDatosArea = () => {  // Recibe setAreas como prop
 
             const data = await response.json();
 
-            if (data.response.result === true){
+            if (data.response === true){
                 alert("Ingresado correctamente");
             }
 
@@ -56,7 +56,7 @@ const ModalCargaDatosArea = () => {  // Recibe setAreas como prop
     return (
         <div>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosAreaModal">
-                Agregar un Area Protegida
+                Agregar una Nueva Área  
             </button>
             <div className="modal fade text-black" id="DatosAreaModal" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
                 <div className="modal-dialog">

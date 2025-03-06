@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import CargarDatosActividad from "../ModalCargaDatos/CargaDatosActividad";
 import CargarDatosEspecies from "../ModalCargaDatos/CargaDatosEspecies";
 import LearnMoreAreas from './LearnMoreAreas';
+import DeleteArea from '../Deleters/DeleteArea';
+import CargarModArea from '../ModalCargaDatos/CargarModArea';
 
 const ViewAreas = ({ area }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);  // Estado para manejar el colapso
@@ -52,6 +54,8 @@ const ViewAreas = ({ area }) => {
                 <div className={`collapse ${isOptionsCollapsed ? 'show' : ''}`} id={`collapseOpcionesArea${area.id}`}>
                   <CargarDatosActividad idArea={area.id} />
                   <CargarDatosEspecies idArea={area.id} />
+                  <DeleteArea idArea={area.id} />
+                  <CargarModArea area={area} />
                 </div>
               </li>
             ) : null}
