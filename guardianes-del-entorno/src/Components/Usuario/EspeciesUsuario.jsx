@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ViewActividades from '../Actividades/ViewActividades';
+import ViewEspecie from '../Especies/ViewSpecies';
 
-const ActividadesUsuario = ({ user }) => {
+const EspeciesUsuario = ({ user }) => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const pageSize = 10;
@@ -13,7 +13,7 @@ const ActividadesUsuario = ({ user }) => {
             try {
                 setLoading(true);
                 setError("");
-                const res = await fetch(`https://mammal-excited-tarpon.ngrok-free.app/api/conservation-activity/byUser?userId=${user.id}&page=${page}&pageSize=${pageSize}`);
+                const res = await fetch(`https://mammal-excited-tarpon.ngrok-free.app/api/species/byUser?userId=${user.id}&page=${page}&pageSize=${pageSize}`);
                 
                 if (!res.ok) throw new Error("Error al obtener los datos");
 
@@ -36,21 +36,21 @@ const ActividadesUsuario = ({ user }) => {
             {error && <tr><td colSpan="4" className="text-danger">{error}</td></tr>}
             
             {data.length > 0 ? (
-                data.map((activity) => (
-                    <tr key={activity.id}>
-                        <td>{activity.description}</td>
-                        <td>-</td>
-                        <td>{activity.date}</td>
+                data.map((species) => (
+                    <tr key={species.id}>
+                        <td>{species.commonName}</td>
+                        <td>{species.category}</td>
+                        <td>{species.conservationStatus}</td>
                         <td>
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#DatosActividadUserModal-${activity.id}`}>
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#DatosEspecieUserModal-${species.id}`}>
                                 Ver más
                             </button>
 
                             {/* Modal */}
-                            <div className="modal fade text-black" id={`DatosActividadUserModal-${activity.id}`} tabIndex="-1" aria-labelledby={`DatosActividadUserLabel-${activity.id}`} aria-hidden="true">
+                            <div className="modal fade text-black" id={`DatosEspecieUserModal-${species.id}`} tabIndex="-1" aria-labelledby={`DatosEspecieUserLabel-${species.id}`} aria-hidden="true">
                                 <div className="modal-dialog">
                                     <div className="modal-content">
-                                        <ViewActividades actividad = {activity} />
+                                        <ViewEspecie especie={species} />
                                     </div>
                                 </div>
                             </div>
@@ -59,11 +59,11 @@ const ActividadesUsuario = ({ user }) => {
                 ))
             ) : (
                 <tr>
-                    <td colSpan="4" className="table-danger">No hay datos de actividad</td>
+                    <td colSpan="4" className="table-danger">No hay datos de Especie</td>
                 </tr>
             )}
         </>
     );
 };
 
-export default ActividadesUsuario;
+export default EspeciesUsuario;
