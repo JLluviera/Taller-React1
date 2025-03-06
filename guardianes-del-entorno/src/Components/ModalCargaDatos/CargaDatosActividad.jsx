@@ -67,7 +67,7 @@ const CargaDatosActividad = ({ idArea }) => {
                 Agregar un Area Protegida
             </button>
         
-            <div className="modal fade text-black" id="DatosArea" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
+            <div className="modal fade text-black" id="DatosAreaModal" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -75,6 +75,7 @@ const CargaDatosActividad = ({ idArea }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
+                            {error && <p className="text-danger text-center">{error}</p>}
                             <form onSubmit={HandleSubmitActividades}>  
                                 <div className="mb-3">
                                     <label className='form-label' htmlFor='descripcion'>Descripcion</label>
@@ -84,6 +85,9 @@ const CargaDatosActividad = ({ idArea }) => {
                                     <label className='form-label' htmlFor='date'>Fecha de realizacion</label>
                                     <input type='date' className='form-control' id='date' value={date} onChange={(e) => setDate(e.target.value)} required />
                                 </div>
+                                <button type="submit" className="btn btn-primary" disabled={loading}>
+                                    {loading ? "Registrando..." : "Registrar Area"}
+                                </button>
                             </form>
                         </div>
                     </div>

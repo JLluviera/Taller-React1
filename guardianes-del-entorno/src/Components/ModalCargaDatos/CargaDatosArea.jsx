@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
-const ModalCargaDatosArea = ({ setAreas }) => {  // Recibe setAreas como prop
+const ModalCargaDatosArea = () => {  // Recibe setAreas como prop
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [areaType, setAreaType] = useState("");
@@ -20,7 +20,7 @@ const ModalCargaDatosArea = ({ setAreas }) => {  // Recibe setAreas como prop
 
         let postAreaData = {
             userId: user.id,
-            Area: {
+            naturalArea: {
                 name: name,
                 location: location,
                 areaType: areaType,
@@ -42,11 +42,8 @@ const ModalCargaDatosArea = ({ setAreas }) => {  // Recibe setAreas como prop
 
             const data = await response.json();
 
-            if (data.result === true) {
-                alert("Área registrada correctamente");
-                setAreas(prev => [...prev, data.Area]);  // Agrega el área al estado de áreas
-            } else {
-                alert("Error al registrar área");
+            if (data.response.result === true){
+                alert("Ingresado correctamente");
             }
 
         } catch (error) {
@@ -61,7 +58,7 @@ const ModalCargaDatosArea = ({ setAreas }) => {  // Recibe setAreas como prop
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosAreaModal">
                 Agregar un Area Protegida
             </button>
-            <div className="modal fade text-black" id="DatosArea" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
+            <div className="modal fade text-black" id="DatosAreaModal" tabIndex="-1" aria-labelledby="DatosAreaLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
