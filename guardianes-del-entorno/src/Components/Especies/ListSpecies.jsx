@@ -68,7 +68,7 @@ const ListSpecies = () => {
             <button
               className="btn btn-danger btn-sm mt-2 w-100"
               onClick={() => {
-                setFilters({ keyword: "", areaType: "", region: "", conservationStatus: "" });
+                setFilters({ keyword: "", category: "", conservationStatus: "", naturalAreaId: "" });
                 setPage(1);
               }}
             >
@@ -94,7 +94,11 @@ const ListSpecies = () => {
 
       {data.length > 0 && (
         <div className="text-center mt-3">
-          <button className="btn btn-success" onClick={() => setPage((prev) => prev + 1)}>
+          <p>Mostrando {data.length} especies, Página {page}</p>
+          <button
+            className="btn btn-success"
+            onClick={() => setPage((prev) => prev + 1)}
+          >
             Load More
           </button>
         </div>
