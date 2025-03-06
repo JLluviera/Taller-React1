@@ -71,37 +71,71 @@ const CargaDatosActividad = ({ idArea }) => {
 
   return (
     <div>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DatosActividadModal">
-                Agregar Actividad
-            </button>
-        
-            <div className="modal fade text-black" id="DatosActividadModal" tabIndex="-1" aria-labelledby="DatosActividLadel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="DatosActividadLabel">Ingreso de datos</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button 
+        type="button" 
+        className="btn btn-primary" 
+        data-bs-toggle="modal" 
+        data-bs-target="#DatosActividadModal"
+    >
+        Agregar Actividad
+    </button>
+
+    <div 
+        className="modal fade text-black" 
+        id="DatosActividadModal" 
+        tabIndex="-1" 
+        aria-labelledby="DatosActividadLabel" 
+        aria-hidden="true"
+    >
+        <div className="modal-dialog">
+            <div className="modal-content rounded-3 shadow-lg">
+                <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="DatosActividadLabel">Ingreso de datos</h1>
+                    <button 
+                        type="button" 
+                        className="btn-close" 
+                        data-bs-dismiss="modal" 
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div className="modal-body">
+                    {error && <p className="text-danger text-center">{error}</p>}
+                    <form onSubmit={HandleSubmitActividades}>  
+                        <div className="mb-3">
+                            <label className='form-label' htmlFor='descripcion'>Descripcion</label>
+                            <input 
+                                type='text' 
+                                className='form-control border-2 rounded-pill' 
+                                id='descripcion' 
+                                onChange={(e) => setDescripcion(e.target.value)} 
+                                required 
+                            />
                         </div>
-                        <div className="modal-body">
-                            {error && <p className="text-danger text-center">{error}</p>}
-                            <form onSubmit={HandleSubmitActividades}>  
-                                <div className="mb-3">
-                                    <label className='form-label' htmlFor='descripcion'>Descripcion</label>
-                                    <input type='text' className='form-control' id='descripcion' onChange={(e) => setDescripcion(e.target.value)} required />
-                                </div>
-                                <div className="mb-3">
-                                    <label className='form-label' htmlFor='date'>Fecha de realizacion</label>
-                                    <input type='date' className='form-control' id='date' value={date} onChange={(e) => setDate(e.target.value)} required />
-                                </div>
-                                <button type="submit" className="btn btn-primary" disabled={loading}>
-                                    {loading ? "Registrando..." : "Registrar Actividad"}
-                                </button>
-                            </form>
+                        <div className="mb-3">
+                            <label className='form-label' htmlFor='date'>Fecha de realización</label>
+                            <input 
+                                type='date' 
+                                className='form-control border-2 rounded-pill' 
+                                id='date' 
+                                value={date} 
+                                onChange={(e) => setDate(e.target.value)} 
+                                required 
+                            />
                         </div>
-                    </div>
+                        <button 
+                            type="submit" 
+                            className="btn btn-primary rounded-pill w-100" 
+                            disabled={loading}
+                        >
+                            {loading ? "Registrando..." : "Registrar Actividad"}
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
     </div>
+</div>
+
   )
 }
 
