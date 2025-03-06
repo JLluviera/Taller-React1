@@ -32,45 +32,64 @@ const AreaUsuario = ({ user }) => {
 
     return (
         <>
-            {loading && <tr><td colSpan="4">Cargando...</td></tr>}
-            {error && <tr><td colSpan="4" className="text-danger">{error}</td></tr>}
-            
-            {data.length > 0 ? (
-                data.map((area) => (
-                    <tr key={area.id}>
-                        <td>{area.name}</td>
-                        <td>{area.areaType}</td>
-                        <td>{area.conservationStatus}</td>
-                        <td>
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#DatosAreaUserModal-${area.id}`}>
-                                Ver más
-                            </button>
+            <table className="table table-striped">
+                {loading && <tbody><tr><td colSpan="4">Cargando...</td></tr></tbody>}
+                {error && <tbody><tr><td colSpan="4" className="text-danger">{error}</td></tr></tbody>}
+                
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Estado de conservación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
 
-                            {/* Modal */}
-                            <div className="modal fade text-black" id={`DatosAreaUserModal-${area.id}`} tabIndex="-1" aria-labelledby={`DatosAreaUserLabel-${area.id}`} aria-hidden="true">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                        <div className='modal-header'>
-                                            <h3>
-                                                Area Natural
-                                            </h3>
-                                        </div>
-                                        <div className='modal-body'>
-                                            <ViewAreas area={area} />
+                {data.length > 0 ? (
+                    <tbody>
+                        {data.map((area) => (
+                            <tr key={area.id}>
+                                <td>{area.name}</td>
+                                <td>{area.areaType}</td>
+                                <td>{area.conservationStatus}</td>
+                                <td>
+                                    <button 
+                                        type="button" 
+                                        className="btn btn-primary" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target={`#DatosAreaUserModal-${area.id}`}
+                                    >
+                                        Ver más
+                                    </button>
+
+                                    {/* Modal */}
+                                    <div className="modal fade text-black" id={`DatosAreaUserModal-${area.id}`} tabIndex="-1" aria-labelledby={`DatosAreaUserLabel-${area.id}`} aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                                <div className='modal-header'>
+                                                    <h3>Area Natural</h3>
+                                                </div>
+                                                <div className='modal-body'>
+                                                    <ViewAreas area={area} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                ))
-            ) : (
-                <tr>
-                    <td colSpan="4" className="table-danger">No hay datos de area</td>
-                </tr>
-            )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                ) : (
+                    <tbody>
+                        <tr>
+                            <td colSpan="4" className="table-danger">No hay datos de área</td>
+                        </tr>
+                    </tbody>
+                )}
+            </table>
         </>
     );
 };
 
 export default AreaUsuario;
+

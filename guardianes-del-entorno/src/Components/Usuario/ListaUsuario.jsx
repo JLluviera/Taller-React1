@@ -14,26 +14,11 @@ const ListaUsuario = ( {user} ) => {
     }, [user]);
 
   return (
-    <div className='container-lg'>
+    <div className='container-fluid'>
         <h2>Areas naturales, Especies y Actividades cargadas por el Usuario</h2>
-        <table className='table align-content-center table-striped'>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Estado de Conservacion</th>
-                    <th>Ver Mas</th>
-                </tr>
-            </thead>
-            <tbody>                
-                    <tr className='table-info'>Areas</tr>
-                    <AreaUsuario user={user}/>
-                    <tr className='table-info'>Especies</tr>
-                    <EspeciesUsuario user={user}/>
-                    <tr className='table-info'>Actividades</tr>
-                    <ActividadesUsuario user={user}/>
-            </tbody>
-        </table>
+        <AreaUsuario user={user} />
+        <EspeciesUsuario user={user} />
+        <ActividadesUsuario user={user} />
     </div>
   )
 }

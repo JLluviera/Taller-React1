@@ -41,31 +41,46 @@ const EspeciesUsuario = ({ user }) => {
 
     return (
         <>
-            {loading && <tr><td colSpan="4">Cargando...</td></tr>}
-            {error && <tr><td colSpan="4" className="text-danger">{error}</td></tr>}
-            
-            {data.length > 0 ? (
-                data.map((species) => (
-                    <tr key={species.id}>
-                        <td>{species.commonName}</td>
-                        <td>{species.category}</td>
-                        <td>{species.conservationStatus}</td>
-                        <td>
-                            <button 
-                                type="button" 
-                                className="btn btn-primary" 
-                                onClick={() => handleViewMore(species)} // Muestra el modal
-                            >
-                                Ver más
-                            </button>
-                        </td>
+            <table className='table table-striped'>
+                {loading && <tbody><tr><td colSpan="4">Cargando...</td></tr></tbody>}
+                {error && <tbody><tr><td colSpan="4" className="text-danger">{error}</td></tr></tbody>}
+
+                <thead>
+                    <tr>
+                        <th>Nombre común</th>
+                        <th>Categoría</th>
+                        <th>Estado de conservación</th>
+                        <th>Acciones</th>
                     </tr>
-                ))
-            ) : (
-                <tr>
-                    <td colSpan="4" className="table-danger">No hay datos de Especie</td>
-                </tr>
-            )}
+                </thead>
+                
+                {data.length > 0 ? (
+                    <tbody>
+                        {data.map((species) => (
+                            <tr key={species.id}>
+                                <td>{species.commonName}</td>
+                                <td>{species.category}</td>
+                                <td>{species.conservationStatus}</td>
+                                <td>
+                                    <button 
+                                        type="button" 
+                                        className="btn btn-primary" 
+                                        onClick={() => handleViewMore(species)} // Muestra el modal
+                                    >
+                                        Ver más
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                ) : (
+                    <tbody>
+                        <tr>
+                            <td colSpan="4" className="table-danger">No hay datos de Especie</td>
+                        </tr>
+                    </tbody>
+                )}
+            </table>
 
             {/* Modal */}
             {selectedSpecies && (
@@ -90,4 +105,5 @@ const EspeciesUsuario = ({ user }) => {
 };
 
 export default EspeciesUsuario;
+
 

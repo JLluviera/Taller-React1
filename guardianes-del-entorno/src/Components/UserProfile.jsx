@@ -30,7 +30,7 @@ const UserProfile = () => {
 
                     {/* Modal */}
                     <div className="modal fade text-black" id={modalId} tabIndex="-1" aria-labelledby={modalId} aria-hidden="true">
-                        <div className="modal-dialog custom-modal">
+                        <div className="modal-dialog modal-dialog-centered custom-modal">
                             <div className="modal-content">
                                <div className="modal-header">
                                     <h5 className="modal-title" id={`${modalId}Label`}>Perfil de Usuario</h5>
