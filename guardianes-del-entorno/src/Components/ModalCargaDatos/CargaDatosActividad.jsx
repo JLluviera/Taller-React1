@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const CargaDatosActividad = ({ idArea }) => {
 
@@ -10,6 +10,12 @@ const CargaDatosActividad = ({ idArea }) => {
     const [date, setDate] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        setDescripcion("");
+        setDate("");
+        setError(null);
+    }, [idArea]);
 
     const PostDatosActividad = async (e) => {
 

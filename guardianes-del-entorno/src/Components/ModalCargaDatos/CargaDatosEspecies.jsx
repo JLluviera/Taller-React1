@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';  // Importa useSelector
 
 const ModalCargaDatosEspecies = ({ idArea }) => { 
@@ -11,6 +11,14 @@ const ModalCargaDatosEspecies = ({ idArea }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
    
+    useEffect(() => {
+        setCommonName("");
+        setScientificName("");
+        setCategory("");
+        setConservationStatus("");
+        setLoading(false);
+        setError(null);
+    }, [idArea]);
 
     const PostEspecies = async () => {
         setLoading(true);
