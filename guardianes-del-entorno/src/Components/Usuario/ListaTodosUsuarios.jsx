@@ -79,7 +79,8 @@ const ListaTodosUsuarios = () => {
 
     return (
         <div>
-            {!showUsers && (
+            {/* Mostrar el botón solo si hay un usuario logueado */}
+            {user && !showUsers && (
                 <button className="btn btn-primary w-100 mb-3" onClick={toggleUserList}>
                     Cargar Usuarios
                 </button>
