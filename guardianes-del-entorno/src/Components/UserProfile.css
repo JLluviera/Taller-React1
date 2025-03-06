@@ -1,0 +1,5 @@
+.custom-modal {
+    max-width: 90% !important; /* Ajusta el ancho */
+    margin: auto; /* Centra el modal */
+    text-align: center;;
+}

@@ -50,7 +50,14 @@ const AreaUsuario = ({ user }) => {
                             <div className="modal fade text-black" id={`DatosAreaUserModal-${area.id}`} tabIndex="-1" aria-labelledby={`DatosAreaUserLabel-${area.id}`} aria-hidden="true">
                                 <div className="modal-dialog">
                                     <div className="modal-content">
-                                        <ViewAreas area={area} />
+                                        <div className='modal-header'>
+                                            <h3>
+                                                Area Natural
+                                            </h3>
+                                        </div>
+                                        <div className='modal-body'>
+                                            <ViewAreas area={area} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

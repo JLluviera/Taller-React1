@@ -7,6 +7,7 @@ const EspeciesUsuario = ({ user }) => {
     const pageSize = 10;
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [selectedSpecies, setSelectedSpecies] = useState(null); // Para controlar la especie seleccionada
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,6 +31,14 @@ const EspeciesUsuario = ({ user }) => {
         fetchData();
     }, [user, page]);
 
+    const handleViewMore = (species) => {
+        setSelectedSpecies(species); // Establece la especie seleccionada
+    };
+
+    const handleCloseModal = () => {
+        setSelectedSpecies(null); // Cierra el modal
+    };
+
     return (
         <>
             {loading && <tr><td colSpan="4">Cargando...</td></tr>}
@@ -42,18 +51,13 @@ const EspeciesUsuario = ({ user }) => {
                         <td>{species.category}</td>
                         <td>{species.conservationStatus}</td>
                         <td>
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#DatosEspecieUserModal-${species.id}`}>
+                            <button 
+                                type="button" 
+                                className="btn btn-primary" 
+                                onClick={() => handleViewMore(species)} // Muestra el modal
+                            >
                                 Ver más
                             </button>
-
-                            {/* Modal */}
-                            <div className="modal fade text-black" id={`DatosEspecieUserModal-${species.id}`} tabIndex="-1" aria-labelledby={`DatosEspecieUserLabel-${species.id}`} aria-hidden="true">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                        <ViewEspecie especie={species} />
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 ))
@@ -62,8 +66,28 @@ const EspeciesUsuario = ({ user }) => {
                     <td colSpan="4" className="table-danger">No hay datos de Especie</td>
                 </tr>
             )}
+
+            {/* Modal */}
+            {selectedSpecies && (
+                <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" aria-labelledby="DatosEspecieUserLabel" aria-hidden="false">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h3>Especie</h3>
+                            </div>
+                            <div className="modal-body">
+                                <ViewEspecie especie={selectedSpecies} />
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
 
 export default EspeciesUsuario;
+

@@ -14,9 +14,9 @@ const ListaUsuario = ( {user} ) => {
     }, [user]);
 
   return (
-    <div>
+    <div className='container-lg'>
         <h2>Areas naturales, Especies y Actividades cargadas por el Usuario</h2>
-        <table className='table table-striped'>
+        <table className='table align-content-center table-striped'>
             <thead>
                 <tr>
                     <th>Nombre</th>

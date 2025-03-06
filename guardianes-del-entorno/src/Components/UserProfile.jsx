@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../userSlice";
 import ListaUsuario from "./Usuario/ListaUsuario";
+import "./UserProfile.css";
 
 const UserProfile = () => {
     const userProfile = useSelector((state) => state.user);
@@ -29,9 +30,15 @@ const UserProfile = () => {
 
                     {/* Modal */}
                     <div className="modal fade text-black" id={modalId} tabIndex="-1" aria-labelledby={modalId} aria-hidden="true">
-                        <div className="modal-dialog">
+                        <div className="modal-dialog custom-modal">
                             <div className="modal-content">
-                                <ListaUsuario user={userProfile} />
+                               <div className="modal-header">
+                                    <h5 className="modal-title" id={`${modalId}Label`}>Perfil de Usuario</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                    <ListaUsuario user={userProfile} />
+                                </div>
                             </div>
                         </div>
                     </div>
