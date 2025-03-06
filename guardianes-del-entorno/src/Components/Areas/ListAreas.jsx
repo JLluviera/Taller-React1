@@ -88,7 +88,7 @@ const ListAreas = () => {
             ) : (
               data.map((item, index) => (
                 <div className="col-md-4 mb-3" key={index}>
-                  <ViewAreas area={item} indexArea={index} />
+                  <ViewAreas area={item} />
                 </div>
               ))
             )}
