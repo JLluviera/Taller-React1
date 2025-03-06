@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ModalEspecie from './ModalEspecie'; // Importamos el modal
 import DeleteSpecies from '../Deleters/DeleteSpecies';
+import ModalCargaDatosEspeciesMod from '../ModalCargaDatos/CargarModEspecie';
 
 const ViewEspecie = ({ especie }) => {
   const user = useSelector((state) => state.user);
@@ -21,7 +22,7 @@ const ViewEspecie = ({ especie }) => {
 
         {user && (
           <div className="mt-3">
-            <button className="btn btn-warning me-2">Editar</button>
+            <ModalCargaDatosEspeciesMod especie={especie} />
             <DeleteSpecies idSpecies={especie.id}/>
 
           </div>
