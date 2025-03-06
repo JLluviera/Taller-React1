@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CargarDatosActividad from "../ModalCargaDatos/CargaDatosActividad";
 import CargarDatosEspecies from "../ModalCargaDatos/CargaDatosEspecies";
+import LearnMoreAreas from './LearnMoreAreas';
 
 const ViewAreas = ({ area }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);  // Estado para manejar el colapso
@@ -13,7 +14,7 @@ const ViewAreas = ({ area }) => {
   const toggleOptionsCollapse = () => setIsOptionsCollapsed(!isOptionsCollapsed);  // Función para alternar el estado de opciones
 
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card" style={{ width: "24rem" }}>
       <img src={area.image} className="card-img-top" alt={area.name} />
       <div className="card-header">
         <h3>{area.name}</h3>
@@ -37,9 +38,9 @@ const ViewAreas = ({ area }) => {
             <li className="list-group-item text-secondary">{area.conservationStatus}</li>
             <li className="list-group-item text-secondary">{area.location}</li>
             <li className="list-group-item text-secondary">{area.region}</li>
+            <li className="list-group-item"> <LearnMoreAreas Area={area} /> </li>
             {user ? (
               <li className="list-group-item">
-                {/* Botón para abrir/cerrar las opciones */}
                 <button 
                   className="btn btn-secondary" 
                   type="button" 
@@ -48,8 +49,6 @@ const ViewAreas = ({ area }) => {
                 >
                   {isOptionsCollapsed ? 'Cerrar opciones' : 'Más opciones'}
                 </button>
-
-                {/* Colapso de las opciones */}
                 <div className={`collapse ${isOptionsCollapsed ? 'show' : ''}`} id={`collapseOpcionesArea${area.id}`}>
                   <CargarDatosActividad idArea={area.id} />
                   <CargarDatosEspecies idArea={area.id} />

@@ -18,10 +18,10 @@ const CargaDatosActividad = ({ idArea }) => {
         setError(null);
 
         let postDatosActividad = {
-            userId: user.id,
-            activity: {
+            ConservationActivity: {
+                userId: user.id,
                 naturalAreaId: idArea,
-                descripcion: descripcion,
+                Description: descripcion,
                 date: date
             }
         };
@@ -43,7 +43,7 @@ const CargaDatosActividad = ({ idArea }) => {
 
             const data = await response.json();
 
-            if(data.response === true) {
+            if(data.result === true) {
                 alert("Actividad registrada correctamente");
             } else {
                 alert("Error al registrar actividad");
@@ -53,6 +53,8 @@ const CargaDatosActividad = ({ idArea }) => {
                 setError(error.message);
                 alert(`Error: ${error.message}`);
                 setLoading(false);
+        }finally{
+            setLoading(false);
         }
     }
     
