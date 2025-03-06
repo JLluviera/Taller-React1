@@ -9,39 +9,39 @@ const ListSpecies = () => {
   const pageSize = 10;
 
   const [filters, setFilters] = useState({
-      keyword: "",
-      category: "",
-      conservationStatus: "",
-      naturalAreaId: "",
-    });
+    keyword: "",
+    category: "",
+    conservationStatus: "",
+    naturalAreaId: "",
+  });
 
-    const filterOrder = ["keyword", "category", "conservationStatus", "naturalAreaId"];
+  const filterOrder = ["keyword", "category", "conservationStatus", "naturalAreaId"];
 
   useEffect(() => {
-      let url = "https://mammal-excited-tarpon.ngrok-free.app/api/species/list?secret=TallerReact2025!&";
-  
-      filterOrder.forEach((key) => {
-        if (filters[key]) url += `${key}=${encodeURIComponent(filters[key])}&`;
-      });
-  
-      url += `Page=${page}&PageSize=${pageSize}`;
-  
-      fetch(url)
-        .then((res) => {
-          if (!res.ok) throw new Error("Error al obtener los datos");
-          return res.json();
-        })
-        .then((newData) => {
-          setData((prevData) => (page === 1 ? newData.items : [...prevData, ...newData.items]));
-        })
-        .catch((err) => setError(err.message));
-    }, [filters, page]); 
+    let url = "https://mammal-excited-tarpon.ngrok-free.app/api/species/list?secret=TallerReact2025!&";
 
-    const handleFilterChange = (e) => {
-      const { name, value } = e.target;
-      setFilters((prev) => ({ ...prev, [name]: value }));
-      setPage(1); // Resetear página cuando se cambia un filtro
-    };
+    filterOrder.forEach((key) => {
+      if (filters[key]) url += `${key}=${encodeURIComponent(filters[key])}&`;
+    });
+
+    url += `Page=${page}&PageSize=${pageSize}`;
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al obtener los datos");
+        return res.json();
+      })
+      .then((newData) => {
+        setData((prevData) => (page === 1 ? newData.items : [...prevData, ...newData.items]));
+      })
+      .catch((err) => setError(err.message));
+  }, [filters, page]);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+    setPage(1); // Resetear página cuando se cambia un filtro
+  };
 
   return (
     <div className="container mt-4">
@@ -81,13 +81,15 @@ const ListSpecies = () => {
           {data.length === 0 ? (
             <p className="text-center">No hay resultados</p>
           ) : (
-            data.map((item, index) => (
-             <div className="col-md-4 mb-3" key={index}>
-                <ViewSpecies especie={item} />
-              </div>
-            ))
+            <div className="row">
+              {data.map((item, index) => (
+                <div className="col-md-4 mb-3" key={index}>
+                  <ViewSpecies especie={item} />
+                </div>
+              ))}
+            </div>
           )}
-      </div>
+        </div>
       </div>
 
       {data.length > 0 && (
