@@ -50,13 +50,6 @@ const ListSpecies = () => {
           </button>
         </div>
       )}
-
-      <ModalCargaDatosEspecies 
-        setAreas={() => {}} 
-        areas={[]} 
-        modalVisible={modalVisible} 
-        setModalVisible={setModalVisible}
-      />
     </div>
   );
 };
