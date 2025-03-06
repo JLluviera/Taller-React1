@@ -42,7 +42,7 @@ const ModalCargaDatosArea = () => {
 
             const data = await response.json();
 
-            if (data.response === true){
+            if (data.result === true){
                 alert("Ingresado correctamente");
             }
 

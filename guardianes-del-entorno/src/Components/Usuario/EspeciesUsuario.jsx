@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ViewEspecie from '../Especies/ViewSpecies';
+import ViewEspecieUser from '../Especies/ViewSpeciesUser';
 
 const EspeciesUsuario = ({ user }) => {
     const [data, setData] = useState([]);
@@ -91,7 +91,7 @@ const EspeciesUsuario = ({ user }) => {
                                 <h3>Especie</h3>
                             </div>
                             <div className="modal-body">
-                                <ViewEspecie especie={selectedSpecies} />
+                                <ViewEspecieUser especie={selectedSpecies} />
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>Cerrar</button>

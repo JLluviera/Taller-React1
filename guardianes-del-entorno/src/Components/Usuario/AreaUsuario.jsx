@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ViewAreas from '../Areas/ViewAreas';
+import ViewAreasUser from '../Areas/ViewAreasUser';
 
 const AreaUsuario = ({ user }) => {
     const [data, setData] = useState([]);
@@ -13,8 +13,7 @@ const AreaUsuario = ({ user }) => {
             try {
                 setLoading(true);
                 setError("");
-                const res = await fetch(`https://mammal-excited-tarpon.ngrok-free.app/api/natural-area/byUser?secret=TallerReact2025!?userId=${user.id}&page=${page}&pageSize=${pageSize}`);
-                
+                const res = await fetch(`https://mammal-excited-tarpon.ngrok-free.app/api/natural-area/byUser?userId=${user.id}&page=${page}&pageSize=${pageSize}`);
                 if (!res.ok) throw new Error("Error al obtener los datos");
 
                 const newData = await res.json();
@@ -70,7 +69,7 @@ const AreaUsuario = ({ user }) => {
                                                     <h3>Area Natural</h3>
                                                 </div>
                                                 <div className='modal-body'>
-                                                    <ViewAreas area={area} />
+                                                    <ViewAreasUser area={area} />
                                                 </div>
                                             </div>
                                         </div>
