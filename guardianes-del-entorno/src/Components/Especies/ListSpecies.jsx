@@ -5,6 +5,8 @@ const ListSpecies = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [error, setError] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const [showLess, setShowLess] = useState(false);
 
   const pageSize = 10;
 
@@ -32,7 +34,12 @@ const ListSpecies = () => {
         return res.json();
       })
       .then((newData) => {
-        setData((prevData) => (page === 1 ? newData.items : [...prevData, ...newData.items]));
+        if (page === 1) {
+          setData(newData.items);
+        } else {
+          setData((prevData) => [...prevData, ...newData.items]);
+        }
+        setHasMore(newData.items.length === pageSize);
       })
       .catch((err) => setError(err.message));
   }, [filters, page]);
@@ -40,7 +47,18 @@ const ListSpecies = () => {
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
-    setPage(1); // Resetear página cuando se cambia un filtro
+    setPage(1);
+    setShowLess(false);
+  };
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1);
+    setShowLess(true);
+  };
+
+  const handleShowLess = () => {
+    setPage(1);
+    setShowLess(false);
   };
 
   return (
@@ -70,6 +88,7 @@ const ListSpecies = () => {
               onClick={() => {
                 setFilters({ keyword: "", category: "", conservationStatus: "", naturalAreaId: "" });
                 setPage(1);
+                setShowLess(false);
               }}
             >
               Limpiar Filtros
@@ -95,12 +114,16 @@ const ListSpecies = () => {
       {data.length > 0 && (
         <div className="text-center mt-3">
           <p>Mostrando {data.length} especies, Página {page}</p>
-          <button
-            className="btn btn-success"
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            Load More
-          </button>
+          {showLess && (
+            <button className="btn btn-warning me-2" onClick={handleShowLess}>
+              Ver Menos
+            </button>
+          )}
+          {hasMore && (
+            <button className="btn btn-success" onClick={handleLoadMore}>
+              Ver Más
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -108,3 +131,4 @@ const ListSpecies = () => {
 };
 
 export default ListSpecies;
+
