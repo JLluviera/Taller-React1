@@ -16,7 +16,7 @@ const ViewAreas = ({ area }) => {
   const toggleOptionsCollapse = () => setIsOptionsCollapsed(!isOptionsCollapsed);  // Función para alternar el estado de opciones
 
   return (
-    <div className="card" style={{ width: "24rem" }}>
+    <div className="card" style={{ width: "20rem" }}>
       <img src={area.image} className="card-img-top" alt={area.name} />
       <div className="card-header">
         <h3>{area.name}</h3>

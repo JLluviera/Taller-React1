@@ -1,17 +1,15 @@
-import React from 'react'
-import { useState } from 'react';
-import ListaUsuario from './ListaUsuario';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import ListaUsuario from './ListaUsuario';
 
 const ListaTodosUsuarios = () => {
-
     const [showUsers, setShowUsers] = useState(false);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [page, setPage] = useState(1);   
+    const [page, setPage] = useState(1);
     const [totalRecords, setTotalRecords] = useState(0);
-    const pageSize = 10;
+    const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
     const user = useSelector((state) => state.user);
 
     const fetchUsers = async (pageNumber) => {
@@ -19,7 +17,7 @@ const ListaTodosUsuarios = () => {
 
         try {
             const response = await fetch(
-                `https://mammal-excited-tarpon.ngrok-free.app/api/user/list?secret=TallerReact2025!&userId=${user.id}&page=${pageNumber}&pageSize=${pageSize}`,
+                `https://mammal-excited-tarpon.ngrok-free.app/api/user/list?secret=TallerReact2025!&userId=${user.id}&page=${pageNumber}&pageSize=10`,
                 {
                     method: "GET",
                     headers: {
@@ -53,7 +51,6 @@ const ListaTodosUsuarios = () => {
         }
     };
 
-
     const handleLoadMore = () => {
         if (users.length >= totalRecords) return;
 
@@ -68,7 +65,6 @@ const ListaTodosUsuarios = () => {
         if (!showUsers) {
             fetchUsers(1);
         } else {
-            // Limpiar datos al cerrar
             setUsers([]);
             setPage(1);
             setTotalRecords(0);
@@ -77,63 +73,71 @@ const ListaTodosUsuarios = () => {
         setShowUsers(!showUsers);
     };
 
-    
     const handleViewProfile = (user) => {
-        <ListaUsuario user={user} />
+        setSelectedUser(user); // Establece el usuario seleccionado
     };
 
-  return (
-    <div>
-        {!showUsers && (
-                        <button className="btn btn-primary w-100 mb-3" onClick={toggleUserList}>
-                            Cargar Usuarios
-                        </button>
-                    )}
+    return (
+        <div>
+            {!showUsers && (
+                <button className="btn btn-primary w-100 mb-3" onClick={toggleUserList}>
+                    Cargar Usuarios
+                </button>
+            )}
 
-                    {showUsers && (
-                        <>
-                            {error && <div className="alert alert-danger text-center">{error}</div>}
+            {showUsers && !selectedUser && ( // Solo muestra la lista de usuarios si no se ha seleccionado uno
+                <>
+                    {error && <div className="alert alert-danger text-center">{error}</div>}
 
-                            <ul className="list-group">
-                                {users.map((user) => (
-                                    <li key={user.id} className="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h5 className="mb-1">{user.name}</h5>
-                                            <p className="text-muted">{user.email}</p>
-                                        </div>
-                                        <button 
-                                            className="btn btn-info btn-sm"
-                                            onClick={() => handleViewProfile(user)}
-                                        >
-                                            Ver perfil
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {/* Contenedor para los botones alineados */}
-                            <div className="d-flex justify-content-between mt-3">
-                                {users.length < totalRecords && (
-                                    <button 
-                                        onClick={handleLoadMore} 
-                                        className="btn btn-secondary"
-                                        disabled={loading}
-                                    >
-                                        {loading ? "Cargando más..." : "Ver más"}
-                                    </button>
-                                )}
-                                
+                    <ul className="list-group">
+                        {users.map((user) => (
+                            <li key={user.id} className="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 className="mb-1">{user.name}</h5>
+                                    <p className="text-muted">{user.email}</p>
+                                </div>
                                 <button 
-                                    onClick={toggleUserList} 
-                                    className="btn btn-danger"
+                                    className="btn btn-info btn-sm"
+                                    onClick={() => handleViewProfile(user)} // Asigna el usuario seleccionado
                                 >
-                                    Cerrar Lista
+                                    Ver perfil
                                 </button>
-                            </div>
-                        </>
-                    )}
-    </div>
-  )
-}
+                            </li>
+                        ))}
+                    </ul>
 
-export default ListaTodosUsuarios
+                    <div className="d-flex justify-content-between mt-3">
+                        {users.length < totalRecords && (
+                            <button 
+                                onClick={handleLoadMore} 
+                                className="btn btn-secondary"
+                                disabled={loading}
+                            >
+                                {loading ? "Cargando más..." : "Ver más"}
+                            </button>
+                        )}
+                        
+                        <button 
+                            onClick={toggleUserList} 
+                            className="btn btn-danger"
+                        >
+                            Cerrar Lista
+                        </button>
+                    </div>
+                </>
+            )}
+
+            {/* Mostrar perfil del usuario seleccionado */}
+            {selectedUser && (
+                <div>
+                    <ListaUsuario user={selectedUser} />
+                    <button className="btn btn-secondary mt-3" onClick={() => setSelectedUser(null)}>
+                        Volver a la lista de usuarios
+                    </button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ListaTodosUsuarios;

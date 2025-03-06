@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import AreaUsuario from './AreaUsuario';
 import EspeciesUsuario from './EspeciesUsuario';
 import ActividadesUsuario from './ActividadesUsuario';
+import { useSelector } from 'react-redux';
 
 
 const ListaUsuario = ( {user} ) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-
+    
     useEffect(() => {
         setLoading(false);
         setError("");
