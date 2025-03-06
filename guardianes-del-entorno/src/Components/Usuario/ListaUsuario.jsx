@@ -18,20 +18,20 @@ const ListaUsuario = ( {user} ) => {
         <h2>Areas naturales, Especies y Actividades cargadas por el Usuario</h2>
         <table className='table table-striped'>
             <thead>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Estado de Conservacion</th>
-                <th>Ver Mas</th>
-            </thead>
-            <tbody>
                 <tr>
-                    <td className='table-info'>Areas</td>
-                    <AreaUsuario user={user}/>
-                    <td className='table-info'>Especies</td>
-                    <EspeciesUsuario user={user}/>
-                    <td className='table-info'>Actividades</td>
-                    <ActividadesUsuario user={user}/>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Estado de Conservacion</th>
+                    <th>Ver Mas</th>
                 </tr>
+            </thead>
+            <tbody>                
+                    <tr className='table-info'>Areas</tr>
+                    <AreaUsuario user={user}/>
+                    <tr className='table-info'>Especies</tr>
+                    <EspeciesUsuario user={user}/>
+                    <tr className='table-info'>Actividades</tr>
+                    <ActividadesUsuario user={user}/>
             </tbody>
         </table>
     </div>
