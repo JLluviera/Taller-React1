@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import ShowComment from '../Comments/ShowComment';
+import CommentInput from '../Comments/CommentInput';
 
 const LearnMoreAreas = ( { Area } ) => {
     const user = useSelector((state => state.user));
@@ -39,7 +41,8 @@ const LearnMoreAreas = ( { Area } ) => {
               <p><strong>Estado de Conservación:</strong> {Area.conservationStatus}</p>
               <p><strong>Ubicación:</strong> {Area.location}</p>
               <p><strong>Región:</strong> {Area.region}</p>
-              <div><strong>Calificación:</strong> {Array.from({ length: 5 }, (_, i) => i < Area.rating ? '⭐' : '☆')}</div>
+              <ShowComment entityId={Area.id} entityType="naturalArea" />
+              {user ? <CommentInput userId={user.id} naturalAreaId={Area.id}/> : null}
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
